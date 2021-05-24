@@ -1,28 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container text-center mt-5">
+      <div class="row">
+
+        <Card
+          v-for="card in cards"
+          :key="card.title"
+          :card="card"
+        />
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
+import Card from '@/components/Card';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Card
+  },
+  data(){
+    return{
+      axios,
+      cards:[],
+    }
+  },
+  created(){
+    axios.get('https://flynn.boolean.careers/exercises/api/array/music')
+      .then(res => {
+        /* ERRORE?(DEVO PRENDERE I RESPONSE, NON IL SUCCESS) */
+        this.cards.response = res.data
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  },
+  
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import '~bootstrap/scss/bootstrap';
+
+  @import '@/style/general.scss';
 </style>
