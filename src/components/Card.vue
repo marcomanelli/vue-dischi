@@ -1,6 +1,9 @@
 <template>
-  <div class="col-sm-6 col-md-4 col-lg-3">
+  <div>
+    <img :src="card.poster" alt="">
     <h3>{{ card.title }}</h3>
+    <h4>{{ card.author }}</h4>
+    <h6>{{ card.year }}</h6>
   </div>
 </template>
 
